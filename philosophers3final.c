@@ -2,8 +2,8 @@
 #include <pthread.h>
 #include <stdlib.h>
 
-#define NUM_PHILOSOPHERS 5
-#define NUM_REFEICOES 10
+#define NUM_PHILOSOPHERS 30
+#define NUM_REFEICOES 30
 
 typedef struct monitor {
     pthread_mutex_t mutex;
@@ -19,7 +19,7 @@ typedef struct {
 
 void test(monitor *m, int i) {
     pthread_mutex_lock(&(m->mutex));
-    if ((m->num_times_eating[i] < NUM_REFEICOES ) && (m->state[(i + 4) % 5] != EATING) && (m->state[i] == HUNGRY) && (m->state[(i + 1) % 5] != EATING)) {
+    if ((m->num_times_eating[i] < NUM_REFEICOES) &&  (m->state[(i + 4) % 5] != EATING) && (m->state[i] == HUNGRY) && (m->state[(i + 1) % 5] != EATING)) {
         m->state[i] = EATING;
         m->num_times_eating[i]++;
         pthread_cond_signal(&(m->self[i]));
@@ -63,13 +63,13 @@ void *runner(void *param){
         pickup(DiningPhilosophers, i);
         pickup(DiningPhilosophers, (i+1) % 5);
         printf("Filosofo %d esta comendo \n", i);
-        delay(3);
+        delay(2);
         //come
         putdown(DiningPhilosophers, i);
         putdown(DiningPhilosophers, (i+1) % 5);
         //pensa
         printf("Filosofo %d esta pensando \n", i);
-        delay(2);
+        delay(1);
         j++;
     }
     printf("Fim da thread do filosofo %d\n", i);
