@@ -1,9 +1,12 @@
+// Nicholas Estevao Pereira de Oliveira Rodrigues Braganca
+// NUSP: 12689616
+
 #include <stdio.h>
 #include <pthread.h>
 #include <stdlib.h>
 
-#define NUM_PHILOSOPHERS 30
-#define NUM_REFEICOES 30
+#define NUM_PHILOSOPHERS 5
+#define NUM_REFEICOES 15
 
 typedef struct monitor {
     pthread_mutex_t mutex;
